@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request; //объект данных формы
 
 class MainController extends Controller
@@ -9,9 +10,11 @@ class MainController extends Controller
     public function home()
     {
         $title = 'Home Page';
-        $subtitle = '<em>Subtitles</em>';
-        $users = ['Bob', 'John', 'Bill'];
-        return view('home', compact('title', 'subtitle', 'users')); //view - ищет файл из папки resorses/views/home.blade.php
+
+        $categories = Category::all();
+        // dd($categories);
+
+        return view('home', compact('title', 'categories')); //view - ищет файл из папки resorses/views/home.blade.php
     }
     public function contacts()
     {

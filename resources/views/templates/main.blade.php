@@ -30,6 +30,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/reviews">Reviews</a>
+                    </li>
 
                 </ul>
                 <form class="d-flex" role="search">

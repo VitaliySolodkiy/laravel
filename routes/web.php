@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +21,7 @@ Route::get('contacts', [MainController::class, 'contacts']);
 Route::post('contacts', [MainController::class, 'getContacts']);
 Route::get('signup', [MainController::class, 'signup']);
 Route::post('signup', [MainController::class, 'getSignup']);
+
+
+Route::resource('admin/categories', CategoryController::class); //создаем ресурсные маршруты. Параметры: url-адрес; контроллер отвечающий за этот ресурс
+Route::resource('admin/reviews', ReviewController::class);
