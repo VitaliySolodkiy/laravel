@@ -3,7 +3,11 @@
 @section('content')
     <h1>Categories</h1>
 
-    <a href="/admin/categories/create" class="btn btn-success">Create</a>
+    <a href="{{ route('categories.create') }}" class="btn btn-success">Create</a>
+
+    @if (session('success'))
+        <div class="text-success my-3">{{ session('success') }}</div>
+    @endif
 
     <table class="table">
         <thead>
@@ -18,7 +22,15 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $category->name }}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ route('categories.edit', ['category' => $category->id]) }}"
+                            class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm">delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

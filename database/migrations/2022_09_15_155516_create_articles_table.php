@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('content');
             $table->string('image', 255)->nullable(); //nullable() - указывает что столбец необязателен к заполнению
+            $table->boolean('important')->default(0);
             $table->unsignedBigInteger('category_id'); //тип столбца должен быть такой же, как у столбца с которым он связан
             $table->foreign('category_id')->references('id')->on('categories'); //связываем столбцы id
             $table->timestamps();

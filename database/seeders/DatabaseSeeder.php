@@ -23,12 +23,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // \App\Models\Category::create([
-        //     'name' => 'Sport'
-        // ]);
-        // \App\Models\Category::create([
-        //     'name' => 'Culture'
-        // ]);
+        \App\Models\Category::create([
+            'name' => 'Sport'
+        ]);
+        \App\Models\Category::create([
+            'name' => 'Culture'
+        ]);
 
         Review::create([
             'name' => 'test user1',

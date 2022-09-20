@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        $articles = Article::all();
+        return view('admin.articles.index', compact('articles'));
     }
 
     /**
@@ -26,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $categories = Category::all()->pluck('name', 'id');
+        return view('admin.articles.create', compact('categories'));
     }
 
     /**
@@ -37,14 +39,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|min:3|max:100'
-        ]);
-
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('categories.index')->with('success', "Category $category->name was created");
+        $article = new Article();
+        $article->name = $request->name;
+        $article->content = $request->content;
+        $article->important = $request->important ?? 0;
+        $article->category_id = $request->category_id;
+        $article->save();
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -66,8 +67,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findorFail($id); //findorFail используется вместо find, если есть вероятность обращения к несуществующей странице
-        return view('admin.categories.edit', compact('category'));
+        //
     }
 
     /**
@@ -79,14 +79,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|min:3|max:100'
-        ]);
-
-        $category = Category::findorFail($id);
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('categories.index'); //redirect() возвращает объект и на нем вызывается метод route
+        //
     }
 
     /**
@@ -97,7 +90,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findorFail($id)->delete();
-        return redirect()->route('categories.index');
+        //
     }
 }

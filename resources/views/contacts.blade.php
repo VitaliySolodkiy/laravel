@@ -13,7 +13,7 @@
         </div>
     @endif --}}
 
-    <form action="/contacts" method="POST">
+    <form action="{{ route('getContacts') }}" method="POST">
         @csrf
         <div class="form-group mt-3">
             <label for="">Name</label>
