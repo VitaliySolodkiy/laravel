@@ -16,7 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('category')->paginate(3); //get() - по умолчанию возвращает всю выборку. Но вместо него можно исопльзовать paginate()
+
         return view('admin.articles.index', compact('articles'));
     }
 
@@ -42,7 +43,7 @@ class ArticleController extends Controller
         $article = new Article();
         $article->name = $request->name;
         $article->content = $request->content;
-        $article->important = $request->important ?? 0;
+        $article->important = $request->important;
         $article->category_id = $request->category_id;
         $article->save();
         return redirect()->route('articles.index');

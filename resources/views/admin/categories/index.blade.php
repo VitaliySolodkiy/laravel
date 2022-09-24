@@ -21,7 +21,8 @@
             @foreach ($categories as $category)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->name }} <span
+                            class="badge rounded-pill text-bg-primary">{{ $category->articles_count }}</span></td>
                     <td>
                         <a href="{{ route('categories.edit', ['category' => $category->id]) }}"
                             class="btn btn-warning btn-sm">Edit</a>

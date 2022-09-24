@@ -25,12 +25,13 @@
         <tbody>
             @foreach ($articles as $article)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $article->image }}</td>
+                    <td>{{ ($articles->currentPage() - 1) * $articles->perPage() + $loop->iteration }}</td>
+                    <td> <img src="{{ $article->image }}" style="width:70px" alt="">
+                    </td>
                     <td>{{ $article->name }}</td>
-                    <td>{{ $article->content }}</td>
+                    <td>{{ $article->short_content }}</td>
                     <td>{{ $article->important }}</td>
-                    <td>{{ $article->category_id }}</td>
+                    <td>{{ $article->category->name }}</td>
                     <td>{{ $article->created_at }}</td>
                     <td>
                         <a href="{{ route('articles.edit', ['article' => $article->id]) }}"
@@ -45,4 +46,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $articles->links() }}
 @endsection
