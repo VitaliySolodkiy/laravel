@@ -15,7 +15,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all();
+        $reviews = Review::with('article')->get();
         return view('admin.reviews.index', compact('reviews'));
     }
 

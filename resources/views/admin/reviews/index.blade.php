@@ -11,6 +11,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Content</th>
+                <th>Article title</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $review->name }}</td>
                     <td>{{ $review->content }}</td>
+                    <td>{{ $review->article->name }}</td>
                 </tr>
             @endforeach
         </tbody>

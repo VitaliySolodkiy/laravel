@@ -18,6 +18,7 @@
                 <th>Content</th>
                 <th>Important</th>
                 <th>Category</th>
+                <th>Comments count</th>
                 <th>Created</th>
                 <th></th>
             </tr>
@@ -29,9 +30,22 @@
                     <td> <img src="{{ $article->image }}" style="width:70px" alt="">
                     </td>
                     <td>{{ $article->name }}</td>
-                    <td>{{ $article->short_content }}</td>
+                    <td>{{ $article->short_content }}</td> {{-- short_content - функция из Models/Article. В файле функция называется shortContent(), но здесь camel case первращаем в snake --}}
                     <td>{{ $article->important }}</td>
                     <td>{{ $article->category->name }}</td>
+                    {{-- category->name получаем следующим образом:
+                        - в Models/Article создается функция category()
+                        - в ней указываем что article принадлежит категории.
+                        - соответственно в объекте article появляется коллекция category откуда мы можем извлечь нужные нам данные
+                        Документация - https://laravel.com/docs/9.x/eloquent-relationships
+                        --}}
+                    <td> <span class="badge rounded-pill text-bg-primary">{{ $article->reviews->count() }}</span> </td>
+                    {{-- rewievs получаем следующим образом:
+                        - в Models/Article создается функция reviews()
+                        - в ней указываем что article имеет отзывы.
+                        - соответственно в объекте article появляется коллекция reviews откуда мы можем извлечь нужные нам данные
+                        - через функцию count() получаем количество комментарием относящихся к конкретной статье
+                        --}}
                     <td>{{ $article->created_at }}</td>
                     <td>
                         <a href="{{ route('articles.edit', ['article' => $article->id]) }}"

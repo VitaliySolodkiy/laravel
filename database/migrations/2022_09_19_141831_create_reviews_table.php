@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('content');
+            $table->unsignedBigInteger('article_id');
+            $table->foreign('article_id')->references('id')->on('articles');
+            $table->timestamps();
         });
     }
 
