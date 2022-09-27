@@ -40,12 +40,32 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $article = new Article();
+        /*         $article = new Article();
         $article->name = $request->name;
         $article->content = $request->content;
         $article->important = $request->important;
         $article->category_id = $request->category_id;
-        $article->save();
+        if ($request->image) {
+            $path = $request->image->store('', ['disk' => 'public']); //сохранение загруженного файла в папку
+            // настройки в config\filesystems.php, подмассив public
+            // первым параметром метода store() можно указать подпапку, в той папке, которую мы указали в файле filesystems.php
+            //в $path возвращается путь к файлу.
+            $article->image = '/uploads/' . $path;
+        }
+        $article->save(); */
+
+        $article = Article::create($request->all()); //в параметрах указываем массив данных. метод all() возвращает ассоциативный массив со всеми полями формы (кроме файлов)
+        // перед использованием Article::create в Models/Article.php добавляем переменную $fillable, куда прописываем массив всех полей, который разрешаем массово заполнять
+        //после использования Article::create в $article возвращается уже существующая статья с id
+
+        if ($request->image) {
+            $path = $request->image->store('articles', ['disk' => 'public']); //сохранение загруженного файла в папку
+            // настройки в config\filesystems.php, подмассив public
+            // первым параметром метода store() можно указать подпапку, в той папке, которую мы указали в файле filesystems.php
+            //в $path возвращается путь к файлу.
+            $article->image = '/uploads/' . $path;
+            $article->save();
+        }
         return redirect()->route('articles.index');
     }
 
@@ -80,7 +100,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //$article = Article::findOrFail($id);
+        // $article->update($request->all());
+        // image - see method store()
     }
 
     /**
@@ -91,6 +113,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::findOrFail($id)->delete();
+        return redirect()->route('articles.index');
     }
 }

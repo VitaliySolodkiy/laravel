@@ -24,5 +24,10 @@
 
 <div class="form-group mt-3">
     {!! Form::label('category_id', 'Category') !!}
-    {!! Form::select('category_id', $categories, null, ['class' => 'custom-select']) !!}
+    {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group mt-3">
+    {!! Form::label('image', 'Image:') !!}
+    {!! Form::file('image', ['class' => 'form-control']) !!}
 </div>
