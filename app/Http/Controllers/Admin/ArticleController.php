@@ -88,7 +88,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::findorFail($id); //findorFail используется вместо find, если есть вероятность обращения к несуществующей странице
+        $categories = Category::all()->pluck('name', 'id');
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
     /**
@@ -100,9 +102,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$article = Article::findOrFail($id);
-        // $article->update($request->all());
-        // image - see method store()
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+        // $article->save();
+        if ($request->image) {
+            $path = $request->image->store('articles', ['disk' => 'public']); //сохранение загруженного файла в папку
+            // настройки в config\filesystems.php, подмассив public
+            // первым параметром метода store() можно указать подпапку, в той папке, которую мы указали в файле filesystems.php
+            //в $path возвращается путь к файлу.
+            $article->image = '/uploads/' . $path;
+            $article->save();
+        }
+        return redirect()->route('articles.index');
     }
 
     /**

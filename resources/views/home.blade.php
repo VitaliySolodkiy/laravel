@@ -1,11 +1,7 @@
-@extends('templates.main') {{-- пути строим от папки views. вместо слэша используется точка --}}
-
-@section('title')
-    {{ $title }}
-@endsection
+@extends('templates.main')
 
 @section('content')
-    @foreach ($categories as $category)
-        {{ $category->name }} <br>
-    @endforeach
+    <div class="container">
+
+    </div>
 @endsection

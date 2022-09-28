@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\MainController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,9 +31,13 @@ Route::post('contacts', [MainController::class, 'getContacts'])->name('getContac
 Route::get('signup', [MainController::class, 'signup']);
 Route::post('signup', [MainController::class, 'getSignup']);
 
+Auth::routes();
 
-Route::resource('admin/categories', CategoryController::class); //создаем ресурсные маршруты. Параметры: url-адрес; контроллер отвечающий за этот ресурс
-// ресурсные маршруты работают только для предустановленных методов контроллера. Если добавляем свой метод - пишем отдельный путь
-Route::resource('admin/reviews', ReviewController::class);
-
-Route::resource('admin/articles', ArticleController::class);
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('categories', CategoryController::class); //создаем ресурсные маршруты. Параметры: url-адрес; контроллер отвечающий за этот ресурс
+    // ресурсные маршруты работают только для предустановленных методов контроллера. Если добавляем свой метод - пишем отдельный путь
+    // через ->middleware(['auth', 'admin']) ограничиваем вход только для зарегистрированных пользователей и проверяем является ли пользователь админом
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::resource('reviews', ReviewController::class);
+    Route::resource('articles', ArticleController::class);
+});
