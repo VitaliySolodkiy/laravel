@@ -111,6 +111,7 @@ class ArticleController extends Controller
             // первым параметром метода store() можно указать подпапку, в той папке, которую мы указали в файле filesystems.php
             //в $path возвращается путь к файлу.
             $article->image = '/uploads/' . $path;
+
             $article->save();
         }
         return redirect()->route('articles.index');
