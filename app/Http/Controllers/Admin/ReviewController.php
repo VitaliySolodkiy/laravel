@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        return view('admin.reviews.create');
+        $articles = Article::all()->pluck('name', 'id');
+        return view('admin.reviews.create', compact('articles'));
     }
 
     /**
@@ -44,6 +46,7 @@ class ReviewController extends Controller
         $review = new Review();
         $review->name = $request->name;
         $review->content = $request->content;
+        $review->article_id = $request->article_id;
         $review->save();
         return redirect('/admin/reviews');
     }

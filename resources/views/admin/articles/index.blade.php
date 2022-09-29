@@ -48,13 +48,22 @@
                         --}}
                     <td>{{ $article->created_at }}</td>
                     <td>
-                        <a href="{{ route('articles.edit', ['article' => $article->id]) }}"
-                            class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('articles.destroy', ['article' => $article->id]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm">delete</button>
-                        </form>
+                        <div class="row flex-nowrap gx-1">
+                            <div class="col d-flex justify-content-end">
+                                <a href="{{ route('articles.edit', ['article' => $article->id]) }}"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                            </div>
+                            <div class="col">
+
+                                <form action="{{ route('articles.destroy', ['article' => $article->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">delete</button>
+                                </form>
+                            </div>
+                        </div>
+
+
                     </td>
                 </tr>
             @endforeach

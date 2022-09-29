@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $review->name }}</td>
-                    <td>{{ $review->content }}</td>
+                    <td>{{ $review->no_tags_content }}</td>
                     <td>{{ $review->article->name }}</td>
                 </tr>
             @endforeach
