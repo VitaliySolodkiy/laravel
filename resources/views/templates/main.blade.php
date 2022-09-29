@@ -85,7 +85,20 @@
     </nav>
 
     <div class="container">
-        @yield('content')
+        <div class="row">
+            <div class="col-md-3">
+                @section('sidebar')
+                    <ul>
+                        @foreach ($categoriesShare as $category)
+                            <li><a href="/category/{{ $category->slug }}">{{ $category->name }}</a></li>
+                        @endforeach
+
+                    </ul>
+                @show {{-- вместо endsection ставим show - Это позволяет перезаписать секцию. Например на стр. контактов не выводить категории, а показать что-то другое ИЛИ вывести эти данные и добавить что-то еще --}}
+            </div>
+            <div class="col-md-9">@yield('content')</div>
+        </div>
+
     </div>
 
 

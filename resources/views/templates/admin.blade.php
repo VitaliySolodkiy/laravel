@@ -64,7 +64,7 @@
 
     <div class="admin-wrapper">
         <div class="row">
-            <main class="col-md-2">
+            <main class="col-md-4">
                 {{--                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
             </main>
-            <div class="col-md-10">@yield('content')</div>
+            <div class="col-md-8">@yield('content')</div>
         </div>
     </div>
 

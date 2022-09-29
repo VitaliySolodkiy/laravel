@@ -43,3 +43,8 @@
         <button class="btn btn-primary mt-3">Send</button>
     </form>
 @endsection
+
+@section('sidebar')
+    @parent {{-- выводит данные с main.blade.php (категории статье в нашем случае) --}}
+    Режим работы:
+@endsection

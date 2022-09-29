@@ -33,6 +33,11 @@ Route::post('signup', [MainController::class, 'getSignup']);
 
 Auth::routes();
 
+Route::get('article/{article:slug}', [MainController::class, 'article'])->name('article');
+
+
+
+
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('categories', CategoryController::class); //создаем ресурсные маршруты. Параметры: url-адрес; контроллер отвечающий за этот ресурс
     // ресурсные маршруты работают только для предустановленных методов контроллера. Если добавляем свой метод - пишем отдельный путь

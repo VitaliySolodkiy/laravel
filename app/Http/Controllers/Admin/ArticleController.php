@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('category')->paginate(3); //get() - по умолчанию возвращает всю выборку. Но вместо него можно исопльзовать paginate()
+        $articles = Article::with('category')->orderBy('created_at', 'DESC')->paginate(3); //get() - по умолчанию возвращает всю выборку. Но вместо него можно исопльзовать paginate()
 
         return view('admin.articles.index', compact('articles'));
     }

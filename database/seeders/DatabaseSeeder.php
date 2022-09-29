@@ -33,14 +33,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678')
         ]);
 
-        /*         \App\Models\Category::create([
+        \App\Models\Category::create([
             'name' => 'Sport'
         ]);
         \App\Models\Category::create([
             'name' => 'Culture'
-        ]); */
+        ]);
 
-        /*         Review::create([
+        Review::create([
             'name' => 'test user1',
             'content' => 'good site',
             'article_id' => '1',
@@ -60,6 +60,6 @@ class DatabaseSeeder extends Seeder
             'article_id' => '2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]); */
+        ]);
     }
 }
