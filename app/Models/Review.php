@@ -10,6 +10,7 @@ class Review extends Model
 {
     use HasFactory;
     //public $timestamps = false;
+    protected $fillable = ['name', 'content', 'article_id'];
     public function article()
     {
         return $this->belongsTo(Article::class); //позволяет отобразить название статьи на странице списка комментариев

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
+    {{--     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -60,9 +60,9 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> --}}
 
-    <div class="admin-wrapper">
+    <div class="container">
         <div class="row">
             <main class="col-md-4">
                 {{--                 <ul class="nav flex-column">
@@ -91,21 +91,10 @@
                         <svg class="bi pe-none me-2" width="40" height="32">
                             <use xlink:href="#bootstrap" />
                         </svg>
-                        <span class="fs-4">Sidebar</span>
+                        <span class="fs-4">My site</span>
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a href="{{ route('home') }}" class="nav-link active" aria-current="page">
-
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('getContacts') }}" class="nav-link link-dark">
-                                Contacts
-                            </a>
-                        </li>
                         <li>
                             <a href="{{ route('categories.index') }}" class="nav-link link-dark">
                                 Categories
@@ -129,16 +118,17 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                                 class="rounded-circle me-2">
-                            <strong>mdo</strong>
+                            <strong>{{ Auth::user()->name }}</strong>
                         </a>
                         <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Some link</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Sign
+                                    out</a></li>
                         </ul>
                     </div>
                 </div>

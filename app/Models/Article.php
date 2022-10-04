@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,5 +53,10 @@ class Article extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function getCreatedAtAttribute($date) //меняем формат выводимой даты создания статьи. теперь при обращении к $article->created_at будет выводить только дата без часов
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
     }
 }

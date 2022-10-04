@@ -1,4 +1,4 @@
-@extends ('templates.main')
+@extends ('templates.admin')
 
 @section('content')
     <h1>Articles</h1>
@@ -20,7 +20,7 @@
                 <th>Category</th>
                 <th>Comments count</th>
                 <th>Created</th>
-                <th></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>

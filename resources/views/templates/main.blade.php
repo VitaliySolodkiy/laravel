@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="{{ route('home') }}">My site</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -23,13 +23,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    {{--                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('getContacts') }}">Contacts</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
                     <li class="nav-item">
@@ -40,7 +40,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/reviews">Reviews</a>
-                    </li>
+                    </li> --}}
 
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -88,12 +88,18 @@
         <div class="row">
             <div class="col-md-3">
                 @section('sidebar')
-                    <ul>
-                        @foreach ($categoriesShare as $category)
-                            <li><a href="/category/{{ $category->slug }}">{{ $category->name }}</a></li>
-                        @endforeach
+                    <div>
+                        <h4 class="fst-italic">
+                            Categories
+                        </h4>
+                        <ul>
+                            @foreach ($categoriesShare as $category)
+                                <li><a href="/category/{{ $category->slug }}">{{ $category->name }}</a></li>
+                            @endforeach
 
-                    </ul>
+                        </ul>
+                    </div>
+
                 @show {{-- вместо endsection ставим show - Это позволяет перезаписать секцию. Например на стр. контактов не выводить категории, а показать что-то другое ИЛИ вывести эти данные и добавить что-то еще --}}
             </div>
             <div class="col-md-9">@yield('content')</div>

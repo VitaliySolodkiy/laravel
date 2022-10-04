@@ -1,10 +1,10 @@
 @extends ('templates.admin')
 
 @section('content')
-    <h1>Edit Article</h1>
-    {!! Form::model($article, ['route' => ['articles.update', $article->id], 'files' => true, 'method' => 'PUT']) !!}
+    <h1>Edit Comment</h1>
+    {!! Form::model($review, ['route' => ['reviews.update', $review->id], 'method' => 'PUT']) !!}
     {{-- у модели есть свойство name, значить в поле с названием name подставляется его значение --}}
-    @include('admin.articles._form')
+    @include('admin.reviews._form')
     {!! Form::submit('Save', ['class' => 'btn btn-success mt-3']) !!}
     {!! Form::close() !!}
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Review;
 use Illuminate\Http\Request; //объект данных формы
 
 class MainController extends Controller
@@ -15,7 +16,7 @@ class MainController extends Controller
         // $categories = Category::all();
         // dd($categories);
 
-        $articles = Article::where('important', '=', 1)->whereNotNull('image')->latest()->get(); //если при сравнении используем '=', то его можно опустить
+        $articles = Article::with('category')->where('important', '=', 1)->whereNotNull('image')->latest()->get(); //если при сравнении используем '=', то его можно опустить
 
         return view('home', compact('articles')); //view - ищет файл из папки resorses/views/home.blade.php
     }
@@ -63,6 +64,8 @@ class MainController extends Controller
     {
         // $article = Article::findOrFail($id);
         // в  resources\views\home.blade.php для получения пути к статье используем $article->slug
-        dd($article);
+        // dd($article);
+        $reviews = Review::all()->where('article_id', $article->id);
+        return view('singleArticle', compact('article', 'reviews'));
     }
 }

@@ -31,18 +31,18 @@ Route::post('contacts', [MainController::class, 'getContacts'])->name('getContac
 Route::get('signup', [MainController::class, 'signup']);
 Route::post('signup', [MainController::class, 'getSignup']);
 
-Auth::routes();
+Auth::routes(); //добавляет пути для регистрации, авторизации и т.п.
 
 Route::get('article/{article:slug}', [MainController::class, 'article'])->name('article');
 
-
-
-
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::resource('categories', CategoryController::class); //создаем ресурсные маршруты. Параметры: url-адрес; контроллер отвечающий за этот ресурс
+    Route::resource('categories', CategoryController::class);
+    //создаем ресурсные маршруты. Параметры: url-адрес; контроллер отвечающий за этот ресурс
     // ресурсные маршруты работают только для предустановленных методов контроллера. Если добавляем свой метод - пишем отдельный путь
     // через ->middleware(['auth', 'admin']) ограничиваем вход только для зарегистрированных пользователей и проверяем является ли пользователь админом
+
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('reviews', ReviewController::class);
+    Route::post('reviews', [ReviewController::class, 'store'])->withoutMiddleware('admin'); //разрешаем сохранение комментария без роли "админ"
     Route::resource('articles', ArticleController::class);
 });

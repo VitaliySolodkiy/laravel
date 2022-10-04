@@ -46,5 +46,7 @@
 
 @section('sidebar')
     @parent {{-- выводит данные с main.blade.php (категории статье в нашем случае) --}}
-    Режим работы:
+    <h4 class="fst-italic">
+        Work hours
+    </h4>
 @endsection
