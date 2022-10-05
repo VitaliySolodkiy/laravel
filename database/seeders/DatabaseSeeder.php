@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Review;
+use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        /* \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => 'majestis777@gmail.com',
             'role' => 'admin',
@@ -60,6 +61,15 @@ class DatabaseSeeder extends Seeder
             'article_id' => '2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]); */
+
+        Tag::create([
+            'name' => 'PHP',
+            'slug' => 'php',
+        ]);
+        Tag::create([
+            'name' => 'Laravel',
+            'slug' => 'laravel',
         ]);
     }
 }

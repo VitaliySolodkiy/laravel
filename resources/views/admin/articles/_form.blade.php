@@ -28,6 +28,11 @@
 </div>
 
 <div class="form-group mt-3">
+    {!! Form::label('tags', 'Tags') !!}
+    {!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
+</div>
+
+<div class="form-group mt-3">
     {!! Form::label('image', 'Image:') !!}
     {!! Form::file('image', ['class' => 'form-control']) !!}
 </div>

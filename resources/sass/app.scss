@@ -21,3 +21,9 @@ body{
     object-fit: cover;
     object-position: center;
 }
+
+.important-js{
+    &:hover{
+        cursor: pointer;
+    }
+}

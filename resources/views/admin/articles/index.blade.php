@@ -25,13 +25,15 @@
         </thead>
         <tbody>
             @foreach ($articles as $article)
-                <tr>
+                <tr data-id="{{ $article->id }}">
                     <td>{{ ($articles->currentPage() - 1) * $articles->perPage() + $loop->iteration }}</td>
                     <td> <img src="{{ $article->image }}" style="width:70px" alt="">
                     </td>
                     <td>{{ $article->name }}</td>
                     <td>{{ $article->short_content }}</td> {{-- short_content - функция из Models/Article. В файле функция называется shortContent(), но здесь camel case первращаем в snake --}}
-                    <td>{{ $article->important }}</td>
+                    <td><i
+                            class="icon important-js @if ($article->important) text-success @else text-danger @endif">{{ $article->important }}</i>
+                    </td>
                     <td>{{ $article->category->name }}</td>
                     {{-- category->name получаем следующим образом:
                         - в Models/Article создается функция category()

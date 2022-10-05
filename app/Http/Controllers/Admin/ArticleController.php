@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -29,7 +30,8 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all()->pluck('name', 'id');
-        return view('admin.articles.create', compact('categories'));
+        $tags = Tag::all()->pluck('name', 'id'); //[1] => 'PHP', [2] => 'Lareavel'
+        return view('admin.articles.create', compact('categories', 'tags'));
     }
 
     /**
@@ -66,6 +68,10 @@ class ArticleController extends Controller
             $article->image = '/uploads/' . $path;
             $article->save();
         }
+
+        $article->tags()->sync($request->tags);
+        //используем метод tags() из модели Article. С него возвращается объект у которого есть разные функции для работы со связанными данными
+
         return redirect()->route('articles.index');
     }
 
@@ -90,7 +96,8 @@ class ArticleController extends Controller
     {
         $article = Article::findorFail($id); //findorFail используется вместо find, если есть вероятность обращения к несуществующей странице
         $categories = Category::all()->pluck('name', 'id');
-        return view('admin.articles.edit', compact('article', 'categories'));
+        $tags = Tag::all()->pluck('name', 'id');
+        return view('admin.articles.edit', compact('article', 'categories', 'tags'));
     }
 
     /**
@@ -104,7 +111,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         $article->update($request->all());
-        // $article->save();
+
         if ($request->image) {
             $path = $request->image->store('articles', ['disk' => 'public']); //сохранение загруженного файла в папку
             // настройки в config\filesystems.php, подмассив public
@@ -114,6 +121,7 @@ class ArticleController extends Controller
 
             $article->save();
         }
+        $article->tags()->sync($request->tags);
         return redirect()->route('articles.index');
     }
 
@@ -127,5 +135,15 @@ class ArticleController extends Controller
     {
         Article::findOrFail($id)->delete();
         return redirect()->route('articles.index');
+    }
+    public function changeImportant($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->important = !$article->important;
+        $article->save();
+        return response()->json([
+            'success' => true,
+            'content' => $article->important,
+        ]);
     }
 }

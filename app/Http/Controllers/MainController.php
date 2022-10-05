@@ -59,6 +59,7 @@ class MainController extends Controller
         ]);
         return dd($request->all());
     }
+
     public function article(Article $article) //за счет указания класса к которому принадлежит переменная, автоматически происходит выборка из БД по id и возвращается объект той или иной статьи
     // https://laravel.com/docs/9.x/routing#route-model-binding
     {
