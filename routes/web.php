@@ -46,4 +46,5 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('reviews', [ReviewController::class, 'store'])->withoutMiddleware('admin'); //разрешаем сохранение комментария без роли "админ"
     Route::resource('articles', ArticleController::class);
     Route::get('articles/changeImportant/{id}', [ArticleController::class, 'changeImportant']);
+    Route::get('articles/changeArticleName/{id}/{newTitle}', [ArticleController::class, 'changeArticleName']);
 });

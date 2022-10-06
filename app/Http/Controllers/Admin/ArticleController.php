@@ -146,4 +146,15 @@ class ArticleController extends Controller
             'content' => $article->important,
         ]);
     }
+    public function changeArticleName($id, $newTitle)
+    {
+        $article = Article::findOrFail($id);
+        $article->name = $newTitle;
+        $article->save();
+        return response()->json([
+            'success' => true,
+            'id' => $id,
+            'title' => $newTitle,
+        ]);
+    }
 }

@@ -29,7 +29,11 @@
                     <td>{{ ($articles->currentPage() - 1) * $articles->perPage() + $loop->iteration }}</td>
                     <td> <img src="{{ $article->image }}" style="width:70px" alt="">
                     </td>
-                    <td>{{ $article->name }}</td>
+                    <td>
+                        <div class="article-name" data-edit="false">
+                            <p>{{ $article->name }}</p>
+                        </div>
+                    </td>
                     <td>{{ $article->short_content }}</td> {{-- short_content - функция из Models/Article. В файле функция называется shortContent(), но здесь camel case первращаем в snake --}}
                     <td><i
                             class="icon important-js @if ($article->important) text-success @else text-danger @endif">{{ $article->important }}</i>
