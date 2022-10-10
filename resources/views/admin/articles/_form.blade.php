@@ -32,7 +32,17 @@
     {!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
 </div>
 
-<div class="form-group mt-3">
+{{-- <div class="form-group mt-3">
     {!! Form::label('image', 'Image:') !!}
     {!! Form::file('image', ['class' => 'form-control']) !!}
+</div> --}}
+
+<div class="input-group  mt-3">
+    <span class="input-group-btn">
+        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+            <i class="fa fa-picture-o"></i> Choose
+        </a>
+    </span>
+    <input id="thumbnail" class="form-control" type="text" name="image"> {{-- name="image" согласно полю для урл картинки в базе данных --}}
 </div>
+<div id="holder" style="margin-top:15px;max-height:100px;"></div>

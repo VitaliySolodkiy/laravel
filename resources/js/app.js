@@ -1,10 +1,15 @@
+import axios from 'axios';
 import './bootstrap';
+
+import { lfm } from './lfm';
+
+
 const importantBtns = document.querySelectorAll('.important-js');
 
 importantBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const id = btn.closest('tr').dataset.id;
-        axios.get(`/admin/articles/changeImportant/${id}`)
+        axios.put(`/admin/articles/changeImportant`, { id: id })
             .then(response => {
                 if (response.data.success) {
                     // btn.textContent = btn.textContent === '0' ? 1 : 0;
@@ -16,6 +21,7 @@ importantBtns.forEach(btn => {
     })
 });
 
+//============изменение тайта статьи============
 const articleTitles = document.querySelectorAll('.article-name');
 
 articleTitles.forEach(title => {
@@ -49,3 +55,15 @@ articleTitles.forEach(title => {
         }
     })
 })
+
+
+//подключаем визуальный редактор
+var options = {
+    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+    filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+};
+CKEDITOR.replace('content', options);
+
+lfm('lfm', 'image');

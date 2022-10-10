@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => public_path() . '/uploads', //получаем путь к папке паблик и конкатенируем в какую папку загружать файлы
-            'url' => env('APP_URL') . '/storage',
+            'url' => env('APP_URL') . '/uploads',
             'visibility' => 'public',
             'throw' => false,
         ],

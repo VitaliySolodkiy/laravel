@@ -45,6 +45,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('reviews', ReviewController::class);
     Route::post('reviews', [ReviewController::class, 'store'])->withoutMiddleware('admin'); //разрешаем сохранение комментария без роли "админ"
     Route::resource('articles', ArticleController::class);
-    Route::get('articles/changeImportant/{id}', [ArticleController::class, 'changeImportant']);
+    Route::put('articles/changeImportant', [ArticleController::class, 'changeImportant']);
     Route::get('articles/changeArticleName/{id}/{newTitle}', [ArticleController::class, 'changeArticleName']);
+});
+
+//путь для визуального редактора
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });

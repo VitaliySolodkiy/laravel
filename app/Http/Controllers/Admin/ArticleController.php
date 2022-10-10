@@ -60,14 +60,16 @@ class ArticleController extends Controller
         // перед использованием Article::create в Models/Article.php добавляем переменную $fillable, куда прописываем массив всех полей, который разрешаем массово заполнять
         //после использования Article::create в $article возвращается уже существующая статья с id
 
-        if ($request->image) {
+        /*         
+-----without lfm-------
+if ($request->image) {
             $path = $request->image->store('articles', ['disk' => 'public']); //сохранение загруженного файла в папку
             // настройки в config\filesystems.php, подмассив public
             // первым параметром метода store() можно указать подпапку, в той папке, которую мы указали в файле filesystems.php
             //в $path возвращается путь к файлу.
             $article->image = '/uploads/' . $path;
             $article->save();
-        }
+        } */
 
         $article->tags()->sync($request->tags);
         //используем метод tags() из модели Article. С него возвращается объект у которого есть разные функции для работы со связанными данными
@@ -111,7 +113,8 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         $article->update($request->all());
-
+        $article->tags()->sync($request->tags);
+        /*         -----without lfm-------
         if ($request->image) {
             $path = $request->image->store('articles', ['disk' => 'public']); //сохранение загруженного файла в папку
             // настройки в config\filesystems.php, подмассив public
@@ -120,8 +123,8 @@ class ArticleController extends Controller
             $article->image = '/uploads/' . $path;
 
             $article->save();
-        }
-        $article->tags()->sync($request->tags);
+        } */
+
         return redirect()->route('articles.index');
     }
 
@@ -136,9 +139,9 @@ class ArticleController extends Controller
         Article::findOrFail($id)->delete();
         return redirect()->route('articles.index');
     }
-    public function changeImportant($id)
+    public function changeImportant(Request $request)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::findOrFail($request->id);
         $article->important = !$article->important;
         $article->save();
         return response()->json([
