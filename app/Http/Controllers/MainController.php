@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactForm;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Review;
 use Illuminate\Http\Request; //объект данных формы
+use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
@@ -34,7 +36,8 @@ class MainController extends Controller
             'email' => 'required|email',
             'message' => 'required|max:255',
         ]);
-        return $request->name;
+        Mail::to('majestis777@gmail.com')->send(new ContactForm($request->name, $request->email, $request->message));
+        return redirect()->back()->with('success', 'Thank you! Mail was sent.');
     }
 
     public function signup()

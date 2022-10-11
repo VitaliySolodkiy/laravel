@@ -32,6 +32,12 @@ class ContactForm extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from Laravel')->view('mail.contact');
+        return $this
+            ->subject('Mail from Laravel')
+            ->view('mail.contact', [
+                'name' => $this->name,
+                'email' => $this->email,
+                'content' => $this->message,
+            ]);
     }
 }
